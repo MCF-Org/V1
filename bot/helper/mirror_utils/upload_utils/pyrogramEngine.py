@@ -113,14 +113,14 @@ class TgUploader:
 
     def __prepare_file(self, up_path, file_, dirpath):
         if self.__lprefix:
-            cap_mono = f"{self.__lprefix} <code>{file_}</code>"
+            cap_mono = f"{self.__lprefix} <b>{file_}</b>"
             self.__lprefix = sub('<.*?>', '', self.__lprefix)
             file_ = f"{self.__lprefix} {file_}"
             new_path = ospath.join(dirpath, file_)
             rename(up_path, new_path)
             up_path = new_path
         else:
-            cap_mono = f"<code>{file_}</code>"
+            cap_mono = f"<b>{file_}</b>"
         return up_path, cap_mono
 
     @retry(wait=wait_exponential(multiplier=2, min=4, max=8), stop=stop_after_attempt(3),
